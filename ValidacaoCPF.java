@@ -32,7 +32,12 @@ public class ValidacaoCPF {
 			calc1 =  calc1 + (arrayCPF[i] * cont1);
 			cont1--;
 		}
-		primeiroDigito = 11 - (calc1 % 11);
+		primeiroDigito = calc1 % 11;
+		if(primeiroDigito < 2){
+			primeiroDigito = 0;
+		}else{
+			primeiroDigito = 11 - primeiroDigito;
+		}
 
 		
         //calculo do segundo digito verificador
@@ -40,7 +45,12 @@ public class ValidacaoCPF {
 			calc2 = calc2 + (arrayCPF[i] * cont2);
 			cont2--;
 		}
-		segundoDigito = 11 - (calc2 % 11);
+		segundoDigito = calc2 % 11;
+		if(segundoDigito < 2){
+			segundoDigito = 0;
+		}else{
+			segundoDigito = 11 - segundoDigito;
+		}
 
 		
 		
