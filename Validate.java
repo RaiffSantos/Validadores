@@ -3,8 +3,6 @@ package exercicios;
 public class Validate {
 
 	public void validarCPF(String cpf){
-				
-		int[] arrayCPF = new int[11];
 		
 		int i = 0;
 		int calc1 = 0;
@@ -13,43 +11,56 @@ public class Validate {
 		int cont2 = 11;
 		int primeiroDigito;
 		int segundoDigito;
+		int regist = 0;
 		
-        //Instancia o array com o CNPJ
-		for(i = 0; i < 11; i++){
-			arrayCPF[i] = (int)cpf.charAt(i) - 48;
-		}
-		
-		
-        //Calculo do primeiro digito verificador
-		for(i = 0; i < 9; i++){
-			calc1 =  calc1 + (arrayCPF[i] * cont1);
-			cont1--;
-		}
-		primeiroDigito = calc1 % 11;
-		if(primeiroDigito < 2){
-			primeiroDigito = 0;
-		}else{
-			primeiroDigito = 11 - primeiroDigito;
-		}
-
-		
-        //Calculo do segundo digito verificador
+		//Verifica se todos os digitos são iguais
 		for(i = 0; i < 10; i++){
-			calc2 = calc2 + (arrayCPF[i] * cont2);
-			cont2--;
+			if((cpf.charAt(0) - 48) == (cpf.charAt(i) - 48)){
+				regist++;
+			}
 		}
-		segundoDigito = calc2 % 11;
-		if(segundoDigito < 2){
-			segundoDigito = 0;
-		}else{
-			segundoDigito = 11 - segundoDigito;
-		}
-
 		
-		if(primeiroDigito == arrayCPF[9] && segundoDigito == arrayCPF[10]){
-			System.out.println("CPF v�lido!");
+		if(regist <= 9){
+		
+                    //Calculo do primeiro digito verificador		
+		    for(i = 0; i < 9; i++){
+			    calc1 = calc1 + ((cpf.charAt(i) - 48) * cont1);
+			    cont1--;
+		    }
+		
+		    primeiroDigito = calc1 % 11;
+		    if(primeiroDigito < 2){
+			    primeiroDigito = 0;
+		    }else{
+			    primeiroDigito = 11 - primeiroDigito;
+		    }
+
+		    if(primeiroDigito == (cpf.charAt(9) - 48)){
+			
+                        //Calculo do segundo digito verificador
+		        for(i = 0; i < 10; i++){
+			        calc2 = calc2 + ((cpf.charAt(i) - 48) * cont2);
+			        cont2--;
+		        }
+		
+		        segundoDigito = calc2 % 11;
+		        if(segundoDigito < 2){
+			        segundoDigito = 0;
+		        }else{
+			        segundoDigito = 11 - segundoDigito;
+		        }
+
+		        if(segundoDigito == (cpf.charAt(10) - 48)){
+			        System.out.println("CPF válido!");
+		        }else{
+		        	System.out.println("CPF inválido!");
+		        }
+		
+	    	    }else{
+		        System.out.println("CPF inválido!");
+		    }
 		}else{
-			System.out.println("CPF inv�lido!");
+		    System.out.println("CPF inválido!");
 		}
 		
 	}
@@ -101,9 +112,9 @@ public class Validate {
 		
 		
 		if(primeiroDigito == arrayCNPJ[12] && segundoDigito == arrayCNPJ[13]){
-			System.out.println("CNPJ v�lido!");
+			System.out.println("CNPJ válido!");
 		}else{
-			System.out.println("CNPJ inv�lido!");
+			System.out.println("CNPJ inválido!");
 		}
 	}
 	
